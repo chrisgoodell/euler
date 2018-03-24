@@ -1,43 +1,29 @@
 
-# import time
- 
-# gridSize = [20,20]
- 
-# def recPath(gridSize):
-#     """
-#     Recursive solution to grid problem. Input is a list of (x,y) moves remaining.
-#     """
-#     # base case, no moves left
-#     if gridSize == [0,0]: return 1
-#     # recursive calls
-#     paths = 0
-#     # move left when possible
-#     if gridSize[0] > 0:
-#         paths += recPath([gridSize[0]-1,gridSize[1]])
-#     # move down when possible
-#     if gridSize[1] > 0:
-#         paths += recPath([gridSize[0],gridSize[1]-1])
- 
-#     return paths
- 
-# start = time.time()
-# result = recPath(gridSize)
-# elapsed = time.time() - start
- 
-# print "result %s found in %s seconds" % (result, elapsed)
-
 ## optimized solution
 import time
- 
-def route_num(cube_size):
+
+dim = int(raw_input("Enter a cube length: "))
+def route(cube_size):
     L = [1] * cube_size
     for i in range(cube_size):
         for j in range(i):
-            L[j] = L[j] + L[j-1]
+            L[j] = L[j] + L[j - 1]
         L[i] = 2 * L[i - 1]
     return L[cube_size - 1]
  
 start = time.time()
-n = route_num(20)
+n = route(dim)
 elapsed = (time.time() - start)
+print n
 print "%s found in %s seconds" % (n,elapsed)
+
+
+## using Pascal's triangle for runtime optimization 
+import time
+import math
+
+start2 = time.time()
+n2 = (math.factorial(2*dim)) / ((math.factorial(dim)) ** 2)
+elapsed2 = (time.time() - start2)
+print n2
+print "%s found in %s seconds" % (n2,elapsed2)
